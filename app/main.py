@@ -39,3 +39,7 @@ async def startup_event():
 @app.get("/")
 def root():
     return {"message": "Fuel comparison API is running"}
+
+#testing to see if the CD/CD is working as intended
+
+# another comment
