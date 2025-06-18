@@ -25,7 +25,7 @@ def update_fuel_prices():
 
 # Start scheduler
 scheduler = BackgroundScheduler()
-scheduler.add_job(update_fuel_prices, "cron", hour=6)  # runs daily at 6AM
+scheduler.add_job(update_fuel_prices, "cron", hour=6)
 scheduler.start()
 
 
@@ -40,6 +40,7 @@ async def startup_event():
 def root():
     return {"message": "Fuel comparison API is running"}
 
-#testing to see if the CD/CD is working as intended
+
+# testing to see if the CD/CD is working as intended
 
 # another comment
