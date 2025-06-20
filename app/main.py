@@ -41,5 +41,5 @@ def root():
     return {"message": "Fuel comparison API is running"}
 
 
-# test from my laptop 
-#one more ci/cd test
+# test from my laptop
+# one more ci/cd test
