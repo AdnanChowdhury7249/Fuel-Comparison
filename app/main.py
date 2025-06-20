@@ -1,18 +1,23 @@
-# app/main.py
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from apscheduler.schedulers.background import BackgroundScheduler
 from app.services.fuel_service import fetch_all_prices
-from app.routes import compare
-
+from app.routes.compare import router as compare_router
 
 app = FastAPI()
-app.include_router(compare.router)
 
-# Global in-memory cache
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://18.175.131.44"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(compare_router)
 app.state.cached_data = []
 
 
-# Background task to update cache
 def update_fuel_prices():
     import asyncio
 
@@ -20,16 +25,14 @@ def update_fuel_prices():
     asyncio.set_event_loop(loop)
     data = loop.run_until_complete(fetch_all_prices())
     app.state.cached_data = data
-    print(" Fuel prices updated")
+    print("✅ Fuel prices updated")
 
 
-# Start scheduler
 scheduler = BackgroundScheduler()
 scheduler.add_job(update_fuel_prices, "cron", hour=6)
 scheduler.start()
 
 
-# Run once on startup
 @app.on_event("startup")
 async def startup_event():
     print("🔄 First-time data fetch...")
@@ -39,7 +42,3 @@ async def startup_event():
 @app.get("/")
 def root():
     return {"message": "Fuel comparison API is running"}
-
-
-# test from my laptop
-# one more ci/cd test
