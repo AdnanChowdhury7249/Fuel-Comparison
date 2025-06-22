@@ -26,7 +26,7 @@ function Compare() {
     SDV: "Super Diesel Variant",
   };
   return (
-    <div>
+    <div className="">
       <form onSubmit={handleSubmit}>
         <input type="text"
           value={postcode}
