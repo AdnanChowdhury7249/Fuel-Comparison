@@ -5,10 +5,19 @@ function App() {
 
   useEffect(() => {
     fetch("http://18.175.131.44:8000/")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch(() => setMessage("Failed to connect"));
-  }, []);
+      .then((res) => {
+        console.log('Raw response:', res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log('Parsed data:', data);
+        setMessage(data.message);
+      })
+      .catch((err) => {
+        console.error('Fetch error:', err);
+        setMessage("Failed to connect");
+      });
+  }, []); // ✅ this was broken
 
   return (
     <>
