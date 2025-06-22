@@ -1,7 +1,7 @@
 from geopy.distance import distance
 
 
-def filter_nearby_10km(lat, lon, stations, radius_km=10):
+def filter_nearby_5km(lat, lon, stations, radius_km=5):
     filtered = []
 
     for station in stations:

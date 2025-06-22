@@ -1,20 +1,7 @@
-import { useEffect, useState } from 'react';
+import Compare from "./pages/index";
 
 function App() {
-  const [message, setMessage] = useState('Loading...');
-
-  useEffect(() => {
-    fetch("http://18.175.131.44:8000/")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch(() => setMessage("Failed to connect"));
-  }, []);
-
-  return (
-    <>
-      <h1>{message}</h1>
-    </>
-  );
+  return <Compare />;
 }
 
 export default App;
