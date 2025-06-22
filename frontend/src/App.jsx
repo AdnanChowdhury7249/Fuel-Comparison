@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [message, setMessage] = useState('Loading...');
+  const backendURL = import.meta.env.VITE_API_URL || "http://localhost:8000/";
+
 
   useEffect(() => {
-    fetch("http://18.175.131.44:8000/")
+    fetch(backendURL)
       .then((res) => {
         console.log('Raw response:', res);
         return res.json();
