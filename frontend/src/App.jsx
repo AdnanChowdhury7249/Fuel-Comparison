@@ -2,24 +2,13 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [message, setMessage] = useState('Loading...');
-  const backendURL = import.meta.env.VITE_API_URL || "http://localhost:8000/";
-
 
   useEffect(() => {
-    fetch(backendURL)
-      .then((res) => {
-        console.log('Raw response:', res);
-        return res.json();
-      })
-      .then((data) => {
-        console.log('Parsed data:', data);
-        setMessage(data.message);
-      })
-      .catch((err) => {
-        console.error('Fetch error:', err);
-        setMessage("Failed to connect");
-      });
-  }, []); // ✅ this was broken
+    fetch("http://18.175.131.44:8000/")
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message))
+      .catch(() => setMessage("Failed to connect"));
+  }, []);
 
   return (
     <>
