@@ -1,6 +1,6 @@
 #  Fuel Comparison App
 
-A full-stack web application that allows users to compare nearby fuel prices by entering a UK postcode. The app fetches fuel prices from multiple providers and displays stations within 10km, sorted by proximity or fuel cost.
+A full-stack web application that allows users to compare nearby fuel prices by entering a UK postcode. The app fetches fuel prices from multiple providers and displays stations within 5km, sorted by proximity or fuel cost.
 
 ##  Live Demo
 
