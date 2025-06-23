@@ -8,19 +8,24 @@ function Compare() {
   const [result, setResult] = useState(null)
   const [sortBy, setSortBy] = useState("Nearest")
   const [fuelType, setFuelType] = useState("E10");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await getCompare(postcode)
       setResult(res.data)
-
-
+      setErrorMsg("");
     } catch (error) {
       console.error("Error fetching data", error)
+      if (error.response && error.response.status === 400) {
+        setErrorMsg("Please provide a valid postcode")
+
+      }
 
     }
   }
+
   let sortedStations = [...(result?.stations || [])]
 
   if (sortBy === "Nearest") {
@@ -35,6 +40,7 @@ function Compare() {
   }
 
   return (
+
     <div className="">
       <form onSubmit={handleSubmit}>
         <input type="text"
@@ -62,6 +68,9 @@ function Compare() {
         </select>
         <button type="submit" className="hover:bg-gray-200 rounded p-1 cursor-pointer">Compare</button>
       </form>
+      {errorMsg && (
+        <p className="text-red-500 font-medium mb-2">{errorMsg}</p>
+      )}
       <div className="w-full px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 py-10 w-full max-w-5xl mx-auto ">
           {sortedStations.map((station) => (
