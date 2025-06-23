@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getCompare } from "../api";
+import FuelCard from "../components/FuelCard";
 
 
 function Compare() {
@@ -18,13 +19,6 @@ function Compare() {
 
     }
   }
-
-  const fuelTypeDescriptions = {
-    E10: "Petrol (up to 10% ethanol)",
-    E5: "Premium Petrol (up to 5% ethanol)",
-    B7: "Diesel (up to 7% biodiesel)",
-    SDV: "Super Diesel Variant",
-  };
   return (
     <div className="">
       <form onSubmit={handleSubmit}>
@@ -35,24 +29,13 @@ function Compare() {
         />
         <button type="submit">Compare</button>
       </form>
-      {result && (
-        <div>
-          <p>Postcode:{result.postcode}</p>
-          <ul>
-            {result.stations.map((station, i) => (
-              <li key={i}>
-                {station.brand} - {station.address} ({station.Distance_km.toFixed(2)} km)
-                <ul>
-                  {Object.entries(station.prices).map(([fuel, price]) => (
-                    <li key={fuel}>{fuelTypeDescriptions[fuel] || fuel}: {price}p Per litre</li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
-
+      <div className="w-full px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 py-10 w-full max-w-5xl mx-auto pl-20">
+          {result && result.stations.map((station) => (
+            <FuelCard key={station.site_id} station={station} />
+          ))}
         </div>
-      )}
+      </div>
 
     </div>
   )
