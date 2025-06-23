@@ -28,7 +28,7 @@ Coming soon...
 
 ---
 
-## 🧪 Features
+## Features
 
 -  Search fuel stations by postcode
 -  View stations within 10km
