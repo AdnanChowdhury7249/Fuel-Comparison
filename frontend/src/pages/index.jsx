@@ -63,7 +63,9 @@ function Compare() {
       )}
 
       <div className="flex items-center justify-center pt-10">
-        <form onSubmit={handleSubmit} className="flex items-end gap-4">
+        <form onSubmit={handleSubmit}
+          className="flex flex-col sm:flex-row items-stretch sm:items-end gap-4 w-full max-w-3xl px-4"
+        >
           <input
             type="text"
             value={postcode}
@@ -106,7 +108,7 @@ function Compare() {
         <div className="w-full px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 py-10 w-full max-w-5xl mx-auto">
             {sortedStations.map((station) => (
-              <FuelCard key={station.site_id} station={station} />
+              <FuelCard key={station.site_id} station={station} userPostCode={postcode} />
             ))}
           </div>
         </div>
